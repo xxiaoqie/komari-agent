@@ -190,6 +190,7 @@ func establishTerminalConnection(token, id, endpoint string) {
 // newWSDialer 构造统一的 WebSocket 拨号器（自定义解析、IPv4/IPv6 动态排序、可选 TLS 忽略）
 func newWSDialer() *websocket.Dialer {
 	d := &websocket.Dialer{
+		Proxy: http.ProxyFromEnvironment,
 		HandshakeTimeout: 15 * time.Second,
 		NetDialContext:   dnsresolver.GetDialContext(15 * time.Second),
 	}
